@@ -15,18 +15,24 @@ const Agence = () => {
     'image/CAMILLE.jpg',
     'image/ChantalG.jpg',
     'image/Claire.jpg',
-    'image/HugoJosep.jpg',
+    'image/HugoJosep.jpg', 
     'image/joel.jpg',
     'image/Lawrence.jpg',
     'image/MAXIME.jpg',
+    'image/MEGGIE.jpg',
+    'image/MEL.jpg',
+    'image/Michele.jpg',
+    'image/MyleneS.jpg',
+    'image/Olivier.jpg',
+    'image/SophieA.jpg',
   ]
 
-  useGSAP(function () {
+  useGSAP( ()=> {
 
     gsap.to(imageDivRef.current, {
       scrollTrigger: {
         trigger: imageDivRef.current,
-        // markers: true,
+        markers: true,
         start: 'top 28%',
         end: 'top -70%',
         pin: true,
