@@ -11,7 +11,7 @@ const Agence = () => {
   const imageRef = useRef(null)
 
     const imageArray=[
-    '/image/Carl.jpg',
+    'image/Carl.jpg',
     'image/CAMILLE.jpg',
     'image/ChantalG.jpg',
     'image/Claire.jpg',
@@ -28,37 +28,46 @@ const Agence = () => {
   ]
 
   useGSAP( ()=> {
+    // Set initial image
+    if (imageRef.current) {
+      imageRef.current.src = imageArray[0]
+    }
 
-    gsap.to(imageDivRef.current, {
-      scrollTrigger: {
-        trigger: imageDivRef.current,
-        markers: true,
-        start: 'top 28%',
-        end: 'top -70%',
-        pin: true,
-        pinSpacing: true,
-        pinReparent: true,
-        pinType: 'transform',
-        scrub: 1, // smooth scrubbing with 1s easing
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        onUpdate: (elem) => {
-          let imageIndex;
-          if (elem.progress < 1) {
-            imageIndex = Math.floor(elem.progress * imageArray.length)
-          } else {
-            imageIndex = imageArray.length - 1
+    // Add delay to ensure stair animation completes first
+    gsap.delayedCall(1.5, () => {
+      gsap.to(imageDivRef.current, {
+        scrollTrigger: {
+          trigger: imageDivRef.current,
+          markers: true,
+          start: 'top 28%',
+          end: 'top -70%',
+          pin: true,
+          pinSpacing: true,
+          pinReparent: true,
+          pinType: 'transform',
+          scrub: 1, // smooth scrubbing with 1s easing
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (elem) => {
+            let imageIndex;
+            if (elem.progress < 1) {
+              imageIndex = Math.floor(elem.progress * imageArray.length)
+            } else {
+              imageIndex = imageArray.length - 1
+            }
+            if (imageRef.current) {
+              imageRef.current.src = imageArray[imageIndex]
+            }
           }
-          imageRef.current.src = imageArray[imageIndex]
         }
-      }
+      })
     })
   })
 
 
   return (
     <div className='parent'>
-      <div id='page1' className='py-1 '>
+      <div id='page1' className='py-1 text-black '>
         <div ref={imageDivRef} className='absolute overflow-hidden lg:h-[20vw] h-[30vw] lg:rounded-3xl rounded-xl lg:w-[15vw] w-[25vw] lg:top-96 -top-80 lg:left-[30vw] left-[30vw]'>
           <img ref={imageRef} className='h-full object-cover w-full' src="image/Carl.jpg" alt="" />
         </div>

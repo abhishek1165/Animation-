@@ -10,6 +10,22 @@
 }
 
 body{
-  background-color: black;
+  /* background-color: black; */
+  overflow-x: hidden;
+}
 
-} 
+/* Prevent layout shifts during animations */
+.parent {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Ensure images load properly */
+img {
+  display: block;
+}
+
+/* Prevent FOUC (Flash of Unstyled Content) */
+[ref] {
+  opacity: 1;
+}
